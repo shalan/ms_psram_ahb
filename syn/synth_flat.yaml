@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: Apache-2.0
+# Author: Mohamed Shalan <mshalan@aucegypt.edu>
+#
+# Flat synthesis config — synthesizes top module only, all RTL flattened.
+
+rtl_files:
+  - rtl/psram_csr.v
+  - rtl/psram_cache.v
+  - rtl/psram_ctrl.v
+  - rtl/ahb_slave_if.v
+  - rtl/ms_psram_ahb.v
+
+lib_typ: synth_flow/sky130/hd_124_ss.lib
+lib_fast: /Users/mshalan/work/pdks/volare/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib
+lib_slow: /Users/mshalan/work/pdks/volare/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib
+
+cell_blackbox: /Users/mshalan/work/pdks/volare/ciel/sky130/versions/8afc8346a57fe1ab7934ba5a6056ea8b43078e71/sky130A/libs.ref/sky130_fd_sc_hd/verilog/sky130_fd_sc_hd__blackbox.v
+
+top: ms_psram_ahb
+
+period_ps: 8000
+clock_port: hclk
+objective: pareto
+modules: [ms_psram_ahb]
+
+params:
+  ms_psram_ahb:
+    SPI_CLK_DIV: 2
+    QUAD_EN: 1
+    ADDR_WIDTH: 23
+    INIT_DLY: "16'd5000"
+    RST_DLY: "16'd2500"
+    CACHE_EN: 1
+    CACHE_INDEX_BITS: 4
+
+driving_cell: sky130_fd_sc_hd__inv_1
+load_ff: 33.0
+
+run_sta: true
+run_gls: false
+
+yosys: yosys
+opensta: /nix/store/2ia51h09wfm9qpm9dg3zq52cr578ah61-opensta/bin/sta
+iverilog: iverilog
+vvp: vvp

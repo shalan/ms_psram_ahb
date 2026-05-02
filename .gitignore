@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: Apache-2.0
+# Author: Mohamed Shalan <mshalan@aucegypt.edu>
+
+# Build artifacts
+tmp/
+work/
+results/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# synth_flow is a separate repo (submodule)
+synth_flow/
